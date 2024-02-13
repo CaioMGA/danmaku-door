@@ -1,0 +1,87 @@
+~ start
+
+Presenter: Behind door #1 there is Alana!
+
+~ q1
+Presenter: She wants to know if you are an outdoor or an indoor person
+- Outdoors => q1_1
+- Indoors => q1_2
+
+~ q1_1
+Presenter: She likes that! [[Hahaha!|Hohoho!|Hihihi!|Hehehe!]]
+
+do Globals.bullet_rank += 1
+do Globals.enemy_rank += 1
+=> q2
+
+~ q1_2
+Presenter: She doesn't seem amused
+
+do Globals.bullet_rank -= 1
+do Globals.enemy_rank -= 1
+=> q2
+
+~ q2
+Presenter: Which one would you rather have for breakfast?
+- Pizza from yesterday => q2_1
+- Banana and some cereal => q2_2
+- Eggs => q2_3
+- Just Coffee => q2_4
+
+~ q2_1
+Presenter: [[Hahaha!|Hohoho!|Hihihi!|Hehehe!]]  She really hated that!
+do Globals.enemy_rank -= 2
+=> q3
+
+~ q2_2
+Presenter: She seems neutral
+do Globals.bullet_rank += 1
+=> q3
+
+~ q2_3
+Presenter: She's smiling... she likes eggs on breakfast! [[Hahaha!|Hohoho!|Hihihi!|Hehehe!]]
+do Globals.bullet_rank += 1
+=> q3
+
+~ q2_4
+Presenter: Ooh! My stomach hurts! Hers too.
+do Globals.enemy_rank -= 1
+=> q3
+
+~ q3
+Presenter: What would you eat on an ideal first date?
+- Burger with fries => q3_1
+- Popcorn from the Movie Theater => q3_2
+- Fish bought from local fishermen => q3_3
+- Something expensive => q3_4
+
+~ q3_1
+Presenter: That looks like a no-no!
+do Globals.bullet_rank -= 1
+do Globals.enemy_rank -= 1
+=> q4
+~ q3_2
+Presenter: She looks disappointed! [[Hahaha!|Hohoho!|Hihihi!|Hehehe!]]
+do Globals.bullet_rank += 1
+do Globals.enemy_rank -= 1
+=> q4
+~ q3_3
+Presenter: She almost puked!
+Presenter: She must hate fish... or fishermen...
+Presenter: She probably hates fish...
+do Globals.bullet_rank -= 2
+do Globals.enemy_rank -= 2
+=> q4
+~ q3_4
+Presenter: She can see through your moves! That did not impress her.
+do Globals.bullet_rank += 1
+do Globals.enemy_rank += 1
+=> q4
+
+~ q4
+=> rank_check
+
+~ rank_check
+Bullet Rank {{Globals.bullet_rank}}\nEnemy Rank {{Globals.enemy_rank}}
+
+=> END!

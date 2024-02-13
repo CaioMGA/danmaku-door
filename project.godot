@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+Globals="*res://scripts/Globals.gd"
 
 [editor]
 
@@ -73,7 +74,7 @@ focus_shot={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialogues/main.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogues/main.dialogue", "res://dialogues/fitness-gal.dialogue")
 
 [rendering]
 
