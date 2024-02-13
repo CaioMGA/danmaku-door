@@ -1,0 +1,116 @@
+[gd_scene load_steps=10 format=3 uid="uid://cigvhxtwcce24"]
+
+[ext_resource type="Script" path="res://scripts/demo.gd" id="1_4s2rv"]
+[ext_resource type="Shader" path="res://shaders/PhantomStar.gdshader" id="1_k5153"]
+[ext_resource type="PackedScene" uid="uid://c7eedsm2a7k30" path="res://scenes/player.tscn" id="2_hdwi5"]
+[ext_resource type="PackedScene" uid="uid://0l01ho5l7dgc" path="res://scenes/shooter.tscn" id="4_2ka1v"]
+[ext_resource type="Script" path="res://scripts/DiamondShooter.gd" id="5_hnkn6"]
+[ext_resource type="Script" path="res://scripts/StreamShooter.gd" id="6_ihwqr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8wpj"]
+shader = ExtResource("1_k5153")
+shader_parameter/alpha = 0.2
+shader_parameter/speed = 0.1
+shader_parameter/mod_a = 0.01
+
+[sub_resource type="Gradient" id="Gradient_5s4bq"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ktfhg"]
+gradient = SubResource("Gradient_5s4bq")
+
+[node name="Demo" type="Node2D"]
+script = ExtResource("1_4s2rv")
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1245.0
+offset_bottom = 691.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.341176, 0.227451, 1)
+
+[node name="Caleidoscope" type="Sprite2D" parent="Control"]
+material = SubResource("ShaderMaterial_a8wpj")
+position = Vector2(599.5, 339.875)
+scale = Vector2(4.77734, 680.25)
+texture = SubResource("GradientTexture1D_ktfhg")
+
+[node name="Player" parent="." instance=ExtResource("2_hdwi5")]
+position = Vector2(150, 491)
+
+[node name="Triangle Shooter" parent="." instance=ExtResource("4_2ka1v")]
+position = Vector2(425, 338)
+bullet_base_speed = 200.0
+
+[node name="MovingAim" parent="Triangle Shooter/Aim" index="0"]
+position = Vector2(100, 0)
+
+[node name="Diamond Shooter" parent="." instance=ExtResource("4_2ka1v")]
+position = Vector2(577, 338)
+script = ExtResource("5_hnkn6")
+h_spacing = 16.0
+v_spacing = 16.0
+shape_size = 3
+bullet_base_speed = 200.0
+
+[node name="Aim" parent="Diamond Shooter" index="1"]
+position = Vector2(50, 0)
+
+[node name="MovingAim" parent="Diamond Shooter/Aim" index="0"]
+position = Vector2(100, 0)
+
+[node name="Stream Shooter" parent="." instance=ExtResource("4_2ka1v")]
+position = Vector2(728, 338)
+script = ExtResource("6_ihwqr")
+bullet_base_speed = 200.0
+bullet_interval = 0.1
+
+[node name="MovingAim" parent="Stream Shooter/Aim" index="0"]
+position = Vector2(100, 0)
+
+[node name="Timer" type="Timer" parent="Stream Shooter"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Shoot A" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Shoot A"
+
+[node name="Shoot B" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Shoot B"
+
+[node name="Shoot C" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Shoot C"
+
+[node name="Reset Scene" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[connection signal="button_down" from="UI/VBoxContainer/Shoot A" to="Triangle Shooter" method="shoot"]
+[connection signal="button_down" from="UI/VBoxContainer/Shoot B" to="Diamond Shooter" method="shoot"]
+[connection signal="button_down" from="UI/VBoxContainer/Shoot C" to="Stream Shooter" method="toggle_shooting"]
+[connection signal="button_down" from="UI/VBoxContainer/Reset Scene" to="." method="restart_scene"]
+
+[editable path="Triangle Shooter"]
+[editable path="Diamond Shooter"]
+[editable path="Stream Shooter"]

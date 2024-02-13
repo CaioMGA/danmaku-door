@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://0l01ho5l7dgc"]
+
+[ext_resource type="Script" path="res://scripts/TriangleShooter.gd" id="1_0gqmc"]
+[ext_resource type="Texture2D" uid="uid://ei1co1yd1dxd" path="res://art/bullets/orange_spike.png" id="2_olflo"]
+
+[node name="Shooter" type="Node2D"]
+script = ExtResource("1_0gqmc")
+h_spacing = 32.0
+v_spacing = 32.0
+bullet_base_speed = 20.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_olflo")
+
+[node name="Aim" type="Node2D" parent="."]
+position = Vector2(250, 0)
+
+[node name="MovingAim" type="Node2D" parent="Aim"]

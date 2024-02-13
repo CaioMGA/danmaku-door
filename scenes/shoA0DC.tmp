@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://0l01ho5l7dgc"]
+
+[ext_resource type="Script" path="res://scripts/shooter.gd" id="1_pkr6a"]
+[ext_resource type="Texture2D" uid="uid://ei1co1yd1dxd" path="res://art/bullets/orange_spike.png" id="2_olflo"]
+
+[node name="Shooter" type="Node2D"]
+script = ExtResource("1_pkr6a")
+bullet_scene = null
+h_spacing = null
+v_spacing = null
+layers = 3
+bullet_base_speed = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_olflo")
+
+[node name="Aim" type="Node2D" parent="."]
+position = Vector2(100, 0)
+
+[node name="MovingAim" type="Node2D" parent="Aim"]

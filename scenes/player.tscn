@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7eedsm2a7k30"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_xrauy"]
+[ext_resource type="Texture2D" uid="uid://dn42if2okm4wg" path="res://icon.svg" id="2_d6pwo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4sop1"]
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_xrauy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_d6pwo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4sop1")
+debug_color = Color(0.94902, 0, 0.576471, 0.419608)

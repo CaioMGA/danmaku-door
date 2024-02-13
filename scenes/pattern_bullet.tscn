@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkhbg041v84c7"]
+
+[ext_resource type="Texture2D" uid="uid://dkndfdwrt1jvo" path="res://art/bullets/blue_spike.png" id="1_rkcwy"]
+
+[node name="PatternBullet" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rkcwy")
