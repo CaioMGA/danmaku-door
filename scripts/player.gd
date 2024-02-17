@@ -24,7 +24,8 @@ var can_shoot = false
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	#$AnimatedSprite2D.play("idle")
+	$AnimatedSprite2D.play("idle")
+	$AnimatedSprite2D/AnimatedCore.play("idle")
 	#regular_shoot_timer.stop()
 	#focus_shoot_timer.stop()
 
@@ -61,12 +62,12 @@ func _process(delta):
 	if Input.is_action_pressed("move_down"):
 		velocity.y += 1;
 	
-	#if velocity.x > 0:
-		#$AnimatedSprite2D.play("bank_right")
-	#elif velocity.x < 0:
-		#$AnimatedSprite2D.play("bank_left")
-	#else:
-		#$AnimatedSprite2D.play("idle")
+	if velocity.x > 0:
+		$AnimatedSprite2D.play("bank_right")
+	elif velocity.x < 0:
+		$AnimatedSprite2D.play("bank_left")
+	else:
+		$AnimatedSprite2D.play("idle")
 		
 	if velocity.length() > 0: # should move
 		velocity = velocity.normalized() * speed

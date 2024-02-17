@@ -11,14 +11,24 @@ config_version=5
 [application]
 
 config/name="Danmaku-Door"
-run/main_scene="res://rooms/demo.tscn"
+run/main_scene="res://rooms/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-Globals="*res://scripts/Globals.gd"
+Globals="*res://scripts/Singletons/Globals.gd"
+Utils="*res://scripts/Singletons/Utils.gd"
+
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=600
+window/size/initial_position_type=2
+window/size/extend_to_title=true
+window/stretch/aspect="expand"
+window/stretch/scale_mode="integer"
 
 [editor]
 
@@ -74,7 +84,7 @@ focus_shot={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialogues/main.dialogue", "res://dialogues/fitness-gal.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogues/fitness-gal.dialogue", "res://dialogues/test.dialogue", "res://dialogues/dating-show.dialogue")
 
 [rendering]
 

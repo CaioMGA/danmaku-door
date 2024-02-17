@@ -1,0 +1,31 @@
+~ start
+
+Caio: [[Oi|Aoba|YEAH|Fala, brow]]! Estou criando diálogos!
+
+=> main_options
+
+~ main_options
+Caio: Escolha uma alternativa:
+- A => A  
+- B => B
+- C => C
+- quit => quit
+  
+=> END!
+
+~ A
+Caio: Parece que você quer muito A
+Caio: Seria legal poder voltar para o começo do diálogo
+=> main_options
+
+~ B
+Caio: B de Banana
+=> main_options
+
+~ C
+Caio: C de Caio começando com C de Caio
+=> main_options
+
+~ quit
+
+=> END!

@@ -1,0 +1,146 @@
+~ start
+
+Presenter: Ladies and Gentleman, welcome to ...
+DANMAKU DATING SHOW
+Audience: ** Cheers **
+Presenter: Here in DANMAKU DATING SHOW the constestants try to find love through the power of...
+Presenter: Bullet Dodging!
+Audience: ** Cheers **
+Presenter: Meter filling...
+Audience: ** Woo-ing **
+Presenter: Hyper-activa~~~tion!
+Audience: ** Hyper-ventilating **
+Presenter: Grazing
+** A small fire starts in the middle of the audience **
+Presenter: Autobombing
+Audience: ** Pure Ectasy **
+Presenter: Please bear in mind this game is not finished. Many features could be missing...
+Audience: ** Disappointment noises **
+Firemen control the fire
+Presenter: But let's not forget what we're here for!
+Presenter: We have a special contestant today that will face the challenges behind each door.
+Audience: ** Applause **
+Presenter: But first! ... What is your name, contestant?
+SHOW NAME ENTRY SCREEN
+Audience: ** Cheers **
+Presenter: Alright, Player! Welcome to ...
+DANMAKU DATING SHOW
+Presenter: Behind each door there is a challenge room made by one of our lovely gals.
+Presenter: The difficulty of the room is up to the gal that designed it.
+Presenter: So if she likes you, your challenge could be less punishing.
+Presenter: However...
+Presenter: ... If she doesn't like you...
+Audience: ** Oooooh! **
+Presenter: ... Prepare for Hell...
+Presenter: BULLET HELL!!!
+Audience: ** Applause **
+Presenter: After you faced all rooms, the gals will come to a veredict and you may get to meet one of them on...
+Presenter: THE LOVE ROOM!
+Audience: ** Cheers **
+Presenter: After the Love Room, the gal will decide if you guys should go on a date after the show.
+Audience: ** Cheers **
+=> choose_door
+
+~ choose_door
+Presenter: So, Player, which door will you choose?
+- 1 => fg_1
+- 2 => nerd_gal
+- 3 => punk_gal
+
+~ nerd_gal
+do Globals.select_door(2)
+=> introducing_gal
+
+~ punk_gal
+do Globals.select_door(3)
+=> introducing_gal
+
+~ introducing_gal
+do Globals.start_selected_dialogue()
+Presenter: Good luck!
+
+=> END!
+
+~ fg_1
+do Globals.select_door(1)
+Presenter: Behind door #1 there is Alana!
+Presenter: She wants to know if you are an outdoor or an indoor person
+- Outdoors => fg_1_1
+- Indoors => fg_1_2
+
+~ fg_1_1
+Presenter: She likes that! [[Hahaha!|Hohoho!|Hihihi!|Hehehe!]]
+
+do Globals.bullet_rank += 1
+do Globals.enemy_rank += 1
+=> fg_2
+
+~ fg_1_2
+Presenter: She doesn't seem amused
+
+do Globals.bullet_rank -= 1
+do Globals.enemy_rank -= 1
+=> fg_2
+
+~ fg_2
+Presenter: Which one would you rather have for breakfast?
+- Pizza from yesterday => fg_2_1
+- Banana and some cereal => fg_2_2
+- Eggs => fg_2_3
+- Just Coffee => fg_2_4
+
+~ fg_2_1
+Presenter: [[Hahaha!|Hohoho!|Hihihi!|Hehehe!]]  She really hated that!
+do Globals.enemy_rank -= 2
+=> fg_3
+
+~ fg_2_2
+Presenter: She seems neutral
+do Globals.bullet_rank += 1
+=> fg_3
+
+~ fg_2_3
+Presenter: She's smiling... she likes eggs on breakfast! [[Hahaha!|Hohoho!|Hihihi!|Hehehe!]]
+do Globals.bullet_rank += 1
+=> fg_3
+
+~ fg_2_4
+Presenter: Ooh! My stomach hurts! Hers too.
+do Globals.enemy_rank -= 1
+=> fg_3
+
+~ fg_3
+Presenter: What would you eat on an ideal first date?
+- Burger with fries => fg_3_1
+- Popcorn from the Movie Theater => fg_3_2
+- Fish bought from local fishermen => fg_3_3
+- Something expensive => fg_3_4
+
+~ fg_3_1
+Presenter: That looks like a no-no!
+do Globals.bullet_rank -= 1
+do Globals.enemy_rank -= 1
+=> fg_4
+~ fg_3_2
+Presenter: She looks disappointed! [[Hahaha!|Hohoho!|Hihihi!|Hehehe!]]
+do Globals.bullet_rank += 1
+do Globals.enemy_rank -= 1
+=> fg_4
+~ fg_3_3
+Presenter: She almost puked!
+Presenter: She must hate fish... or fishermen...
+Presenter: She probably hates fish...
+do Globals.bullet_rank -= 2
+do Globals.enemy_rank -= 2
+=> fg_4
+~ fg_3_4
+Presenter: She can see through your moves! That did not impress her.
+do Globals.bullet_rank += 1
+do Globals.enemy_rank += 1
+=> fg_4
+
+~ fg_4
+
+Presenter: This should be interesting!
+
+=> END!

@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_11"
+type="Resource"
+uid="uid://c48j7qvaeijki"
+path="res://.godot/imported/dating-show.dialogue-d8b0cde08295832b660f3a2a87759247.tres"
+
+[deps]
+
+source_file="res://dialogues/dating-show.dialogue"
+dest_files=["res://.godot/imported/dating-show.dialogue-d8b0cde08295832b660f3a2a87759247.tres"]
+
+[params]
+
+defaults=true

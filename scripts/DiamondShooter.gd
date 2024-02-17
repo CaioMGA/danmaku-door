@@ -42,17 +42,20 @@ func generate_targets():
 		i -= 1.0
 	
 	print("targets generated: %d" % [targets.size()])
-	
-func shoot():
+
+func _ready():
 	generate_targets()
+
+func shoot():
+	#generate_targets()
 	var base_aim = aim.global_position.distance_to(global_position)
-	for target in targets:
+	for t in targets:
 		var bullet = bullet_scene.instantiate()
 		get_tree().current_scene.add_child(bullet)
 		bullet.global_position = global_position
 		moving_aim.position = Vector2.ZERO
-		moving_aim.position.x = target.x
-		moving_aim.position.y = target.y
+		moving_aim.position.x = t.x
+		moving_aim.position.y = t.y
 		bullet.look_at(moving_aim.global_position)
 		var speed = bullet_base_speed * bullet.global_position.distance_to(moving_aim.global_position) / base_aim
 		bullet.set_speed(speed, 0.3, 0.01)

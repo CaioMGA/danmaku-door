@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://cigvhxtwcce24"]
+[gd_scene load_steps=14 format=3 uid="uid://cigvhxtwcce24"]
 
 [ext_resource type="Script" path="res://scripts/demo.gd" id="1_4s2rv"]
 [ext_resource type="Shader" path="res://shaders/PhantomStar.gdshader" id="1_k5153"]
-[ext_resource type="PackedScene" uid="uid://c7eedsm2a7k30" path="res://scenes/player.tscn" id="2_hdwi5"]
+[ext_resource type="PackedScene" uid="uid://dmek2nyuv6slq" path="res://scenes/player.tscn" id="2_hdwi5"]
 [ext_resource type="PackedScene" uid="uid://0l01ho5l7dgc" path="res://scenes/shooter.tscn" id="4_2ka1v"]
 [ext_resource type="Script" path="res://scripts/DiamondShooter.gd" id="5_hnkn6"]
 [ext_resource type="Script" path="res://scripts/StreamShooter.gd" id="6_ihwqr"]
+[ext_resource type="Script" path="res://scripts/tests/RankTesting.gd" id="7_vviu5"]
+[ext_resource type="Script" path="res://scripts/Destroyer.gd" id="8_sbah1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a8wpj"]
 shader = ExtResource("1_k5153")
@@ -18,11 +20,16 @@ shader_parameter/mod_a = 0.01
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ktfhg"]
 gradient = SubResource("Gradient_5s4bq")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jfve"]
+size = Vector2(173, 680)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbdef"]
+size = Vector2(1593, 151)
+
 [node name="Demo" type="Node2D"]
 script = ExtResource("1_4s2rv")
 
 [node name="Control" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,6 +60,7 @@ texture = SubResource("GradientTexture1D_ktfhg")
 position = Vector2(150, 491)
 
 [node name="Triangle Shooter" parent="." instance=ExtResource("4_2ka1v")]
+visible = false
 position = Vector2(425, 338)
 bullet_base_speed = 200.0
 
@@ -60,6 +68,7 @@ bullet_base_speed = 200.0
 position = Vector2(100, 0)
 
 [node name="Diamond Shooter" parent="." instance=ExtResource("4_2ka1v")]
+visible = false
 position = Vector2(577, 338)
 script = ExtResource("5_hnkn6")
 h_spacing = 16.0
@@ -74,9 +83,9 @@ position = Vector2(50, 0)
 position = Vector2(100, 0)
 
 [node name="Stream Shooter" parent="." instance=ExtResource("4_2ka1v")]
-position = Vector2(728, 338)
+position = Vector2(730, 296)
+rotation = 3.14159
 script = ExtResource("6_ihwqr")
-bullet_base_speed = 200.0
 bullet_interval = 0.1
 
 [node name="MovingAim" parent="Stream Shooter/Aim" index="0"]
@@ -84,32 +93,129 @@ position = Vector2(100, 0)
 
 [node name="Timer" type="Timer" parent="Stream Shooter"]
 
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+[node name="Rank UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("7_vviu5")
 
-[node name="Shoot A" type="Button" parent="UI/VBoxContainer"]
+[node name="Canvas" type="CanvasLayer" parent="Rank UI"]
+
+[node name="MarginContainer" type="MarginContainer" parent="Rank UI/Canvas"]
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.02
+anchor_right = 0.98
+anchor_bottom = 0.98
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Rank UI" type="HBoxContainer" parent="Rank UI/Canvas/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Rank UI/Canvas/MarginContainer/Rank UI"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Enemy Rank" type="HBoxContainer" parent="Rank UI/Canvas/MarginContainer/Rank UI/VBoxContainer"]
+layout_mode = 2
+
+[node name="Minus" type="Button" parent="Rank UI/Canvas/MarginContainer/Rank UI/VBoxContainer/Enemy Rank"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "-"
+
+[node name="Label" type="Label" parent="Rank UI/Canvas/MarginContainer/Rank UI/VBoxContainer/Enemy Rank"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Enemy Rank"
+
+[node name="Value" type="Label" parent="Rank UI/Canvas/MarginContainer/Rank UI/VBoxContainer/Enemy Rank"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="Plus" type="Button" parent="Rank UI/Canvas/MarginContainer/Rank UI/VBoxContainer/Enemy Rank"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "+"
+
+[node name="Bullet Rank" type="HBoxContainer" parent="Rank UI/Canvas/MarginContainer/Rank UI/VBoxContainer"]
+layout_mode = 2
+
+[node name="Minus" type="Button" parent="Rank UI/Canvas/MarginContainer/Rank UI/VBoxContainer/Bullet Rank"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "-"
+
+[node name="Label" type="Label" parent="Rank UI/Canvas/MarginContainer/Rank UI/VBoxContainer/Bullet Rank"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Bullet Rank"
+
+[node name="Value" type="Label" parent="Rank UI/Canvas/MarginContainer/Rank UI/VBoxContainer/Bullet Rank"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="Plus" type="Button" parent="Rank UI/Canvas/MarginContainer/Rank UI/VBoxContainer/Bullet Rank"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+text = "+"
+
+[node name="Shooting UI" type="VBoxContainer" parent="Rank UI/Canvas/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Shoot A" type="Button" parent="Rank UI/Canvas/MarginContainer/Shooting UI"]
 layout_mode = 2
 text = "Shoot A"
 
-[node name="Shoot B" type="Button" parent="UI/VBoxContainer"]
+[node name="Shoot B" type="Button" parent="Rank UI/Canvas/MarginContainer/Shooting UI"]
 layout_mode = 2
 text = "Shoot B"
 
-[node name="Shoot C" type="Button" parent="UI/VBoxContainer"]
+[node name="Shoot C" type="Button" parent="Rank UI/Canvas/MarginContainer/Shooting UI"]
 layout_mode = 2
 text = "Shoot C"
 
-[node name="Reset Scene" type="Button" parent="UI/VBoxContainer"]
+[node name="Reset Scene" type="Button" parent="Rank UI/Canvas/MarginContainer/Shooting UI"]
 layout_mode = 2
 text = "Restart"
 
-[connection signal="button_down" from="UI/VBoxContainer/Shoot A" to="Triangle Shooter" method="shoot"]
-[connection signal="button_down" from="UI/VBoxContainer/Shoot B" to="Diamond Shooter" method="shoot"]
-[connection signal="button_down" from="UI/VBoxContainer/Shoot C" to="Stream Shooter" method="toggle_shooting"]
-[connection signal="button_down" from="UI/VBoxContainer/Reset Scene" to="." method="restart_scene"]
+[node name="Destroyer" type="Area2D" parent="."]
+position = Vector2(-192, 0)
+script = ExtResource("8_sbah1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Destroyer"]
+position = Vector2(76.5, 346)
+shape = SubResource("RectangleShape2D_1jfve")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Destroyer"]
+position = Vector2(1505, 342)
+shape = SubResource("RectangleShape2D_1jfve")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Destroyer"]
+position = Vector2(797, -84)
+shape = SubResource("RectangleShape2D_lbdef")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Destroyer"]
+position = Vector2(789, 770)
+shape = SubResource("RectangleShape2D_lbdef")
+
+[connection signal="button_down" from="Rank UI/Canvas/MarginContainer/Shooting UI/Shoot A" to="Triangle Shooter" method="shoot"]
+[connection signal="button_down" from="Rank UI/Canvas/MarginContainer/Shooting UI/Shoot B" to="Diamond Shooter" method="shoot"]
+[connection signal="button_down" from="Rank UI/Canvas/MarginContainer/Shooting UI/Shoot C" to="Stream Shooter" method="toggle_shooting"]
+[connection signal="button_down" from="Rank UI/Canvas/MarginContainer/Shooting UI/Reset Scene" to="." method="restart_scene"]
+[connection signal="area_entered" from="Destroyer" to="Destroyer" method="_on_area_entered"]
 
 [editable path="Triangle Shooter"]
 [editable path="Diamond Shooter"]
