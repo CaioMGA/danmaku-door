@@ -83,7 +83,7 @@ position = Vector2(50, 0)
 position = Vector2(100, 0)
 
 [node name="Stream Shooter" parent="." instance=ExtResource("4_2ka1v")]
-position = Vector2(510, 302)
+position = Vector2(558, 74)
 rotation = 1.5708
 script = ExtResource("6_ihwqr")
 rotate_paralel_streams = false
@@ -94,13 +94,13 @@ position = Vector2(100, 0)
 [node name="Timer" type="Timer" parent="Stream Shooter"]
 
 [node name="Stream Shooter2" parent="." instance=ExtResource("4_2ka1v")]
-position = Vector2(322, 302)
+position = Vector2(370, 74)
 rotation = 1.5708
 script = ExtResource("6_ihwqr")
 rotate_paralel_streams = true
 
-[node name="Aim" parent="Stream Shooter2" index="1"]
-position = Vector2(0, 0)
+[node name="MovingAim" parent="Stream Shooter2/Aim" index="0"]
+position = Vector2(100, 0)
 
 [node name="Timer" type="Timer" parent="Stream Shooter2"]
 

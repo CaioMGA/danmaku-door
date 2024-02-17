@@ -86,7 +86,8 @@ position = Vector2(100, 0)
 position = Vector2(510, 302)
 rotation = 1.5708
 script = ExtResource("6_ihwqr")
-rotate_paralel_streams = false
+bullet_scene = null
+rotate_paralel_streams = null
 
 [node name="MovingAim" parent="Stream Shooter/Aim" index="0"]
 position = Vector2(100, 0)
@@ -97,6 +98,7 @@ position = Vector2(100, 0)
 position = Vector2(322, 302)
 rotation = 1.5708
 script = ExtResource("6_ihwqr")
+bullet_scene = null
 rotate_paralel_streams = true
 
 [node name="Aim" parent="Stream Shooter2" index="1"]

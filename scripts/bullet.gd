@@ -16,7 +16,9 @@ func set_speed(spd, min_spd_percent = 0.2, deacc = 0.1):
 
 func set_size(size):
 	$Sprite2D.scale = Vector2(size, size)
-
+func set_hor_offset(h_offset):
+	transform.y + h_offset
+	
 func _process(delta):
 	position += transform.x * speed * delta
 	
