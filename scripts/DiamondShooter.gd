@@ -17,7 +17,7 @@ func _draw() -> void:
 	draw_arc(aim.position, 8.0, 0, 360, 16, Color.YELLOW)
 	draw_circle(moving_aim.position, 7, Color.RED)
 
-func generate_targets():
+func generate_targets() -> void:
 	targets = []
 	var i = 0
 	while (i < shape_size):
@@ -43,10 +43,10 @@ func generate_targets():
 	
 	print("targets generated: %d" % [targets.size()])
 
-func _ready():
+func _ready() -> void:
 	generate_targets()
 
-func shoot():
+func shoot() -> void:
 	#generate_targets()
 	var base_aim = aim.global_position.distance_to(global_position)
 	for t in targets:
@@ -60,6 +60,5 @@ func shoot():
 		var speed = bullet_base_speed * bullet.global_position.distance_to(moving_aim.global_position) / base_aim
 		bullet.set_speed(speed, 0.3, 0.01)
 
-func _process(delta):
+func _process(delta) -> void:
 	rotate(delta)
-	pass

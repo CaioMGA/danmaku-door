@@ -2,22 +2,22 @@ extends Shooter
 
 @export var target: Node
 @export var bullet_scene = preload("res://scenes/bullets/spike.tscn")
-@onready var aim = $Aim
-@onready var moving_aim = $Aim/MovingAim
+@onready var aim:Node2D = $Aim
+@onready var moving_aim:Node2D = $Aim/MovingAim
 
-@export var h_spacing = 16.0
-@export var v_spacing = 16.0
-@export var shape_size = 4
-@export var bullet_base_speed = 100.0
+@export var h_spacing:float = 16.0
+@export var v_spacing:float = 16.0
+@export var shape_size:int = 4
+@export var bullet_base_speed:float = 100.0
 
 
-var targets = []
+var targets:Array = []
 
 func _draw() -> void:
 	draw_arc(aim.position, 8.0, 0, 360, 16, Color.YELLOW)
 	draw_circle(moving_aim.position, 7, Color.RED)
 
-func generate_targets():
+func generate_targets() -> void:
 	targets = []
 	var i = 0
 	while (i < shape_size):
@@ -31,10 +31,10 @@ func generate_targets():
 		i += 1.0
 	print("targets generated: %d" % [targets.size()])
 
-func _ready():
+func _ready() -> void:
 	generate_targets()
 
-func shoot():
+func shoot() -> void:
 	var base_aim = aim.global_position.distance_to(global_position)
 	for t in targets:
 		var bullet = bullet_scene.instantiate()
@@ -54,6 +54,5 @@ func shoot():
 	#bullet.speed = (aim.global_position.distance_to(global_position)) / 60 * bullet_base_speed
 	#bullet.rotation = rotation
 	
-func _process(delta):
+func _process(delta) -> void:
 	rotate(delta)
-	pass

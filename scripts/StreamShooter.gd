@@ -16,40 +16,40 @@ var max_stream_count:int = 5
 var min_bul_interval:float = 0.1
 var max_bul_interval:float = 0.4
 
-var bullet_size = 0.5
-var bullet_speed = 1.5
+var bullet_size:float = 0.5
+var bullet_speed:float = 1.5
 var stream_count:int = 1
-var bullet_interval = 0.1
-var stream_spacing = 32
-var stream_base_rotation = 5.0
+var bullet_interval:float = 0.1
+var stream_spacing:float = 32
+var stream_base_rotation:float = 5.0
 
-var shooting = false
+var shooting:bool = false
 
-func process_rank():
-	stream_count = clampi(lerp(min_stream_count, max_stream_count, Globals.get_enemy_rank_percent()), min_stream_count, max_stream_count)
-	bullet_speed = lerp(max_bul_speed, min_bul_speed, Globals.get_bullet_rank_percent())
-	bullet_size = lerp(min_bul_size, max_bul_size, Globals.get_bullet_rank_percent())
-	bullet_interval = lerp(min_bul_interval, max_bul_interval, Globals.get_bullet_rank_percent())
+func process_rank() -> void:
+	stream_count = clampi(lerp(min_stream_count,max_stream_count,Globals.get_rank_enemy_percent()), min_stream_count, max_stream_count)
+	bullet_speed = lerp(max_bul_speed, min_bul_speed, Globals.get_rank_bullet_percent())
+	bullet_size = lerp(min_bul_size, max_bul_size, Globals.get_rank_bullet_percent())
+	bullet_interval = lerp(min_bul_interval, max_bul_interval, Globals.get_rank_bullet_percent())
 
-func toggle_shooting():
+func toggle_shooting() -> void:
 	if shooting:
 		cease_fire()
 		return
 
 	enable_shooting()
 	
-func enable_shooting():
+func enable_shooting() -> void:
 	shoot_timer.wait_time = bullet_interval
 	shoot_timer.start()
 	shoot_timer.timeout.connect(shoot)
 	shooting = true
 
-func cease_fire():
+func cease_fire() -> void:
 	shoot_timer.stop()
 	shoot_timer.timeout.disconnect(shoot)
 	shooting = false
 
-func shoot():
+func shoot() -> void:
 	process_rank()
 	if shoot_timer.wait_time != bullet_interval:
 		shoot_timer.stop()

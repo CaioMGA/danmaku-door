@@ -58,18 +58,18 @@ texture = SubResource("GradientTexture1D_ktfhg")
 
 [node name="Player" parent="." instance=ExtResource("2_hdwi5")]
 position = Vector2(150, 491)
+normal_speed = 200.0
+focus_speed = 100.0
 
 [node name="Triangle Shooter" parent="." instance=ExtResource("4_2ka1v")]
-visible = false
-position = Vector2(425, 338)
+position = Vector2(325, 65)
 bullet_base_speed = 200.0
 
 [node name="MovingAim" parent="Triangle Shooter/Aim" index="0"]
 position = Vector2(100, 0)
 
 [node name="Diamond Shooter" parent="." instance=ExtResource("4_2ka1v")]
-visible = false
-position = Vector2(577, 338)
+position = Vector2(577, 69)
 script = ExtResource("5_hnkn6")
 h_spacing = 16.0
 v_spacing = 16.0
