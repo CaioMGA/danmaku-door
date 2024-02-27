@@ -17,6 +17,8 @@ var stages_data = {
 	"3": {"gal":"punk", "score": 0, "done":false},
 }
 
+var _player: Player
+
 func select_door(door_num: int) -> void:
 	selected_door = door_num
 
@@ -64,3 +66,9 @@ func get_bullet_rank() -> float:
 
 func get_enemy_rank() -> float:
 	return rank[Utils.RANK_TYPE.ENEMY]
+
+func set_player(player: Player) -> void:
+	_player = player
+
+func get_player():
+	return _player

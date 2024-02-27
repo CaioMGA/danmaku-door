@@ -71,15 +71,15 @@ Presenter: She wants to know if you are an outdoor or an indoor person
 ~ fg_1_1
 Presenter: She likes that! [[Hahaha!|Hohoho!|Hihihi!|Hehehe!]]
 
-do Globals.bullet_rank += 1
-do Globals.enemy_rank += 1
+do Globals.rank_up(Utils.RANK_TYPE.BULLET)
+do Globals.rank_up(Utils.RANK_TYPE.ENEMY)
 => fg_2
 
 ~ fg_1_2
 Presenter: She doesn't seem amused
 
-do Globals.bullet_rank -= 1
-do Globals.enemy_rank -= 1
+do Globals.rank_down(Utils.RANK_TYPE.BULLET)
+do Globals.rank_down(Utils.RANK_TYPE.ENEMY)
 => fg_2
 
 ~ fg_2
@@ -91,22 +91,22 @@ Presenter: Which one would you rather have for breakfast?
 
 ~ fg_2_1
 Presenter: [[Hahaha!|Hohoho!|Hihihi!|Hehehe!]]  She really hated that!
-do Globals.enemy_rank -= 2
+do Globals.rank_down(Utils.RANK_TYPE.ENEMY, 2)
 => fg_3
 
 ~ fg_2_2
 Presenter: She seems neutral
-do Globals.bullet_rank += 1
+do Globals.rank_up(Utils.RANK_TYPE.BULLET)
 => fg_3
 
 ~ fg_2_3
 Presenter: She's smiling... she likes eggs on breakfast! [[Hahaha!|Hohoho!|Hihihi!|Hehehe!]]
-do Globals.bullet_rank += 1
+do Globals.rank_up(Utils.RANK_TYPE.BULLET)
 => fg_3
 
 ~ fg_2_4
 Presenter: Ooh! My stomach hurts! Hers too.
-do Globals.enemy_rank -= 1
+do Globals.rank_down(Utils.RANK_TYPE.ENEMY)
 => fg_3
 
 ~ fg_3
@@ -118,25 +118,25 @@ Presenter: What would you eat on an ideal first date?
 
 ~ fg_3_1
 Presenter: That looks like a no-no!
-do Globals.bullet_rank -= 1
-do Globals.enemy_rank -= 1
+do Globals.rank_down(Utils.RANK_TYPE.BULLET)
+do Globals.rank_down(Utils.RANK_TYPE.ENEMY)
 => fg_4
 ~ fg_3_2
 Presenter: She looks disappointed! [[Hahaha!|Hohoho!|Hihihi!|Hehehe!]]
-do Globals.bullet_rank += 1
-do Globals.enemy_rank -= 1
+do Globals.rank_up(Utils.RANK_TYPE.BULLET)
+do Globals.rank_down(Utils.RANK_TYPE.ENEMY)
 => fg_4
 ~ fg_3_3
 Presenter: She almost puked!
 Presenter: She must hate fish... or fishermen...
 Presenter: She probably hates fish...
-do Globals.bullet_rank -= 2
-do Globals.enemy_rank -= 2
+do Globals.rank_down(Utils.RANK_TYPE.BULLET, 2)
+do Globals.rank_down(Utils.RANK_TYPE.ENEMY, 2)
 => fg_4
 ~ fg_3_4
 Presenter: She can see through your moves! That did not impress her.
-do Globals.bullet_rank += 1
-do Globals.enemy_rank += 1
+do Globals.rank_up(Utils.RANK_TYPE.BULLET)
+do Globals.rank_up(Utils.RANK_TYPE.ENEMY)
 => fg_4
 
 ~ fg_4

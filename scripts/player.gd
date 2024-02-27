@@ -26,6 +26,7 @@ func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	$AnimatedSprite2D.play("idle")
 	$AnimatedSprite2D/AnimatedCore.play("idle")
+	Globals.set_player(self)
 	#regular_shoot_timer.stop()
 	#focus_shoot_timer.stop()
 

@@ -3,6 +3,9 @@ extends Shooter
 @export var target: Node
 @export var bullet_scene = preload("res://scenes/bullets/spike.tscn")
 @export var rotate_paralel_streams: bool = false
+@export var aim_at_player = false
+@export var auto_spin = false
+@export var auto_spin_speed = 0.5
 
 var min_bul_size:float = 0.5
 var max_bul_size:float = 1.5
@@ -24,6 +27,8 @@ var stream_spacing:float = 32
 var stream_base_rotation:float = 5.0
 
 var shooting:bool = false
+
+var player:Player
 
 func process_rank() -> void:
 	stream_count = clampi(lerp(min_stream_count,max_stream_count,Globals.get_rank_enemy_percent()), min_stream_count, max_stream_count)
@@ -71,6 +76,16 @@ func shoot() -> void:
 			bullet.rotation = deg_to_rad((-max_slot + i) * stream_base_rotation)
 		bullet.reparent(get_tree().current_scene)
 		#get_tree().current_scene.add_child(bullet)
-#
+
+func _ready() -> void:
+	player = Globals.get_player()
+
 func _process(delta):
-	rotate(delta / 2.0)
+	if auto_spin :
+		rotate(delta * auto_spin_speed)
+		return
+	
+	if aim_at_player:
+		# look at player
+		look_at(player.global_position)
+	

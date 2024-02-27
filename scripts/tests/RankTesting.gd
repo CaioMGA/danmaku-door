@@ -1,7 +1,11 @@
 extends Control
 
+@export var foo: Curve
+
 func _ready():
 	setup_ui()
+	update_bullet_rank_ui()
+	update_enemy_rank_ui()
 	
 func setup_ui() -> void:
 	# Enemy Rank
